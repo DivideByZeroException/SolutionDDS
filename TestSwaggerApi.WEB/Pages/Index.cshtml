@@ -1,0 +1,134 @@
+﻿@page
+@model IndexModel
+@{
+    //ViewData["Title"] = "Home page";
+    
+}
+
+
+
+<h1>Its Table Project</h1>
+
+<form method="post" enctype="application/x-www-form-urlencoded">
+   
+       
+    
+<div class=selected_items>
+    <table class="table table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th scope="col">Тип</th>
+                <th scope="col">Сумма</th>
+                <th scope="col">Фонд</th>
+                <th scope="col">Что</th>
+                <th scope="col">Персона</th>
+                <th scope="col">Месяц</th>
+                <th scope="col">Номер месяца</th>
+                <th scope="col">Дата</th>
+                <th scope="col">Комментарий (необязательно)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <select name=type>
+
+
+                        @for (int i = 1; i < @Model.Weather.ToList()[1].Count; i++)
+                        {
+                            @if (@Model.Weather.ToList()[@i].ToList()[1] != "")
+                            {
+                                <option value="@Model.Weather.ToList()[@i].ToList()[1]">@Model.Weather.ToList()[@i].ToList()[1]</option>
+                            }
+                        }
+                    </select>
+                </td>
+                    
+                <td>
+                    <input type="number" name="summ">
+                </td>
+                   
+                <td>
+                    <select name="fond">
+
+
+                        @for (int i = 1; i < @Model.Weather.ToList()[0].Count; i++)
+                        {
+                            @if (@Model.Weather.ToList()[@i].ToList()[0] != "")
+                            {
+                                <option value="@Model.Weather.ToList()[@i].ToList()[0]">@Model.Weather.ToList()[@i].ToList()[0]</option>
+                            }
+                        }
+                    </select>
+                </td>
+
+                <td>
+                    <select name="what">
+                        @for(int i = 1; i <  @Model.Weather.ToList()[2].Count; i++)
+                        {
+                            @if ( @Model.Weather.ToList()[@i].ToList()[2] != "")
+                            {
+                                <option>@Model.Weather.ToList()[@i].ToList()[2]</option>
+                            }
+                        }
+                    </select>
+                </td>
+
+                <td>
+                        <select name="person">
+
+
+                            @for (int i = 1; i < @Model.Weather.ToList()[4].Count; i++)
+                            {
+                                @if (@Model.Weather.ToList()[@i].ToList()[4] != "")
+                                {
+                                    <option>@Model.Weather.ToList()[@i].ToList()[4]</option>
+                                }
+                            }
+                        </select>
+                </td>
+
+                <td>
+                    <select name="month">
+
+
+                        @for (int i = 1; i < Model.Weather.ToList()[8].Count; i++)
+                        {
+                            @if (@Model.Weather.ToList()[@i].ToList()[8] != "")
+                            {
+                                <option>@Model.Weather.ToList()[@i].ToList()[8]</option>
+                            }
+                        }
+                    </select>
+                </td>
+
+                <td>
+                    <select name="month_number">
+
+
+                        @for (int i = 1; i < Model.Weather.ToList()[9].Count; i++)
+                        {
+                            @if (@Model.Weather.ToList()[@i].ToList()[9] != "")
+                            {
+                                <option>@Model.Weather.ToList()[@i].ToList()[9]</option>
+                            }
+                        }
+                    </select>
+                </td>
+
+                <td>
+                    <input type="date" name="date">
+                </td>
+
+                <td>
+                    <input type="text" name="comm">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+
+    <input type="submit" value="Отправить" />
+</form>
+<h1>@Model.Title </h1>

@@ -47,8 +47,6 @@ namespace TestSwaggerApi.WEB.Pages
         {
             
             this.Resourse = await this.GetResourceClient.GetAsync();
-            
-
         }
         [HttpPost]
         public async Task OnPost(string type,int summ, string fond,string what,

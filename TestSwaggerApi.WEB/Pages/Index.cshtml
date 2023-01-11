@@ -128,4 +128,33 @@
 
     <input type="submit" value="Отправить" />
 </form>
+
+<div id="data-holder"></div>
+
+ <script type="text/javascript">
+    const uri = 'api/GetResourse';
+    let possiblePersonValues = [];
+
+    function getItems() {
+      fetch(uri)
+        .then(response => response.json())
+        .then(data => _displayItems(data))
+        .catch(error => console.error('Unable to get items.', error));
+    }
+     
+    function _displayItems(data) {
+      const holderBody = document.getElementById('data-holder');
+      holderBody.innerHTML = '';
+
+      data.forEach(item => {
+        console.log("item", item);
+        let dataSpan = document.createElement('span');
+          
+        let persons = item[4];
+        persons.forEach(pName => {
+        dataSpan.innerHtml = pName + ';';//person
+      });
+    }
+</script>
+
 <h1>@Model.Title </h1>

@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web.Http;
 using TestSwaggerApi.Client;
 
 namespace TestSwaggerApi.WEB
@@ -17,7 +18,9 @@ namespace TestSwaggerApi.WEB
     {
         public Startup(IConfiguration configuration)
         {
+            
             Configuration = configuration;
+            
         }
 
         public IConfiguration Configuration { get; }

@@ -19,6 +19,7 @@ namespace TestSwaggerApi
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
+
         }
 
         public IConfiguration Configuration { get; }
@@ -28,6 +29,12 @@ namespace TestSwaggerApi
         {
 
             services.AddControllers();
+            services.AddCors(o => o.AddPolicy("MyPolicy", builder =>
+            {
+                builder.WithOrigins("https://localhost:44349")
+                       .AllowAnyMethod()
+                       .AllowAnyHeader();
+            }));
             //services.AddSwaggerGen(c =>
             //{
             //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "TestSwaggerApi", Version = "v1" });
@@ -45,6 +52,9 @@ namespace TestSwaggerApi
                 //app.UseSwagger();
                 //app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TestSwaggerApi v1"));
             }
+
+            app.UseCors("MyPolicy");
+           
 
             app.UseOpenApi();
             app.UseSwaggerUi3();

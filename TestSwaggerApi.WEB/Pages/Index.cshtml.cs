@@ -24,6 +24,8 @@ namespace TestSwaggerApi.WEB.Pages
         private readonly GetResourceClient GetResourceClient;
         private readonly SaveDataClient SaveDataClient;
         public ICollection<ICollection<object>> Resourse;
+        
+        
       
         public string Title { get; private set; }
 
@@ -49,11 +51,10 @@ namespace TestSwaggerApi.WEB.Pages
             this.Resourse = await this.GetResourceClient.GetAsync();
         }
         [HttpPost]
-        public async Task OnPost(string type,int summ, string fond,string what,
-            string person,string month,string month_number,DateTime date,string comm)
+        public async Task OnPost(DDSDataRow data)
         {
-            await this.SaveDataClient.PostAsync(type,  summ,  fond,  what,
-             person,  month,  month_number,  date,  comm);
+            await this.SaveDataClient.PostAsync(data.Type, data.Summ, data.Fond, data.What,
+             data.Person, data.Month, data.Month_number, data.Date, data.Comm);
         }
 
     }

@@ -23,8 +23,9 @@ namespace TestSwaggerApi.Controllers
         [HttpGet]
         public IList<IList<object>> Get()
         {
-            GetResource getResource = new GetResource();
-            return getResource.Val;
+            WorkWithExcel workWith = new WorkWithExcel();
+            var val = workWith.GetResourse();
+            return val;
         }
     }
 }

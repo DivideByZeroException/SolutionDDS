@@ -29,16 +29,7 @@
         <tbody>
             <tr>
                 <td>
-                    <select name=type>
-
-                        @for (int i = 1; i < @Model.Resourse.ToList()[1].Count; i++)
-                        {
-                            @if (@Model.Resourse.ToList()[@i].ToList()[1] != "")
-                            {
-                                <option value="@Model.Resourse.ToList()[@i].ToList()[1]">@Model.Resourse.ToList()[@i].ToList()[1]</option>
-                            }
-                        }
-                    </select>
+                    <select name=type></select>
                 </td>
                     
                 <td>
@@ -46,71 +37,23 @@
                 </td>
                    
                 <td>
-                    <select name="fond">
-
-
-                        @for (int i = 1; i < @Model.Resourse.ToList()[0].Count; i++)
-                        {
-                            @if (@Model.Resourse.ToList()[@i].ToList()[0] != "")
-                            {
-                                <option value="@Model.Resourse.ToList()[@i].ToList()[0]">@Model.Resourse.ToList()[@i].ToList()[0]</option>
-                            }
-                        }
-                    </select>
+                    <select name="fond"></select>
                 </td>
 
                 <td>
-                    <select name="what">
-                        @for(int i = 1; i <  @Model.Resourse.ToList()[2].Count; i++)
-                        {
-                            @if ( @Model.Resourse.ToList()[@i].ToList()[2] != "")
-                            {
-                                <option>@Model.Resourse.ToList()[@i].ToList()[2]</option>
-                            }
-                        }
-                    </select>
+                    <select name="what"></select>
                 </td>
 
                 <td>
-                        <select name="person">
-
-
-                            @for (int i = 1; i < @Model.Resourse.ToList()[4].Count; i++)
-                            {
-                                @if (@Model.Resourse.ToList()[@i].ToList()[4] != "")
-                                {
-                                    <option>@Model.Resourse.ToList()[@i].ToList()[4]</option>
-                                }
-                            }
-                        </select>
+                    <select name="person"></select>
                 </td>
 
                 <td>
-                    <select name="month">
-
-
-                        @for (int i = 1; i < Model.Resourse.ToList()[8].Count; i++)
-                        {
-                            @if (@Model.Resourse.ToList()[@i].ToList()[8] != "")
-                            {
-                                <option>@Model.Resourse.ToList()[@i].ToList()[8]</option>
-                            }
-                        }
-                    </select>
+                    <select name="month"></select>
                 </td>
 
                 <td>
-                    <select name="month_number">
-
-
-                        @for (int i = 1; i < Model.Resourse.ToList()[9].Count; i++)
-                        {
-                            @if (@Model.Resourse.ToList()[@i].ToList()[9] != "")
-                            {
-                                <option>@Model.Resourse.ToList()[@i].ToList()[9]</option>
-                            }
-                        }
-                    </select>
+                    <select name="month_number"> </select>
                 </td>
 
                 <td>
@@ -126,35 +69,153 @@
 </div>
 
 
-    <input type="submit" value="Отправить" />
+    @*<input type="submit" value="Отправить" />*@
 </form>
-
+<p class="sender_btn" value="Отправить" onclick="send_data()"/>Сохранить</p>
 <div id="data-holder"></div>
 
  <script type="text/javascript">
-    const uri = 'api/GetResourse';
+    document.querySelector('[name="date"]').valueAsDate = new Date();
+    const uriget = 'https://localhost:5001/GetResource';
+    const urisend = 'https://localhost:5001/SaveData';
     let possiblePersonValues = [];
 
+    let items = getItems();
+    function sortItems(data){
+        
+        let type_box = document.querySelector('[name="type"]')
+        let types = []
+        for (let i = 1; i < data[1].length; i++)
+        {
+            if (data[i][1] != "")
+            {
+                types.push(data[i][1])
+                let newOption = new Option(data[i][1], data[i][1]);
+                type_box.append(newOption);
+            }
+        }
+        let fond_box = document.querySelector('[name="fond"]')
+        let fonds = []
+        for (let i = 1; i < data[0].length; i++)
+        {
+            if (data[i][0] != "")
+            {
+                fonds.push(data[i][0])
+                let newOption = new Option(data[i][0], data[i][0]);
+                fond_box.append(newOption);
+            }
+        }
+        let what_box = document.querySelector('[name="what"]')
+        let whats = []
+        for (let i = 1; i < data[2].length; i++)
+        {
+            if (data[i][2] != "")
+            {
+                whats.push(data[i][2])
+                let newOption = new Option(data[i][2], data[i][2]);
+                what_box.append(newOption);
+            }
+        }
+        let person_box = document.querySelector('[name="person"]')
+        let persons = []
+        for (let i = 1; i < data[4].length; i++)
+        {
+            if (data[i][4] != "")
+            {
+                persons.push(data[i][4])
+                let newOption = new Option(data[i][4], data[i][4]);
+                person_box.append(newOption);
+            }
+        }
+        let months_box = document.querySelector('[name="month"]')
+        let months = []
+        for (let i = 1; i < data[8].length; i++)
+        {
+            if (data[i][8] != "")
+            {
+                months.push(data[i][8])
+                let newOption = new Option(data[i][8], data[i][8]);
+                months_box.append(newOption);
+            }
+        }
+        let months_number_box = document.querySelector('[name="month_number"]')
+        let number_months = []
+        for (let i = 1; i < data[9].length; i++)
+        {
+            if (data[i][9] != "")
+            {
+                number_months.push(data[i][9])
+                let newOption = new Option(data[i][9], data[i][9]);
+                months_number_box.append(newOption);
+            }
+        }
+    }
+
+
+
     function getItems() {
-      fetch(uri)
+      fetch(uriget)
         .then(response => response.json())
-        .then(data => _displayItems(data))
+        .then(data => sortItems(data))
         .catch(error => console.error('Unable to get items.', error));
+        
     }
      
-    function _displayItems(data) {
-      const holderBody = document.getElementById('data-holder');
-      holderBody.innerHTML = '';
+    //function _displayItems(data) {
+    //  const holderBody = document.getElementById('data-holder');
+    //  holderBody.innerHTML = '';
 
-      data.forEach(item => {
-        console.log("item", item);
-        let dataSpan = document.createElement('span');
-          
-        let persons = item[4];
-        persons.forEach(pName => {
-        dataSpan.innerHtml = pName + ';';//person
-      });
-    }
+    //  data.forEach(item => {
+    //    console.log("item", item);
+    //    let dataSpan = document.createElement('span');
+    //    dataSpan.textContent = item[4] + ';';//person
+    //    holderBody.appendChild(dataSpan);
+        //let persons = item[4];
+        //console.log('persons ',persons);
+        //persons.forEach(pName => {
+        //    dataSpan.innerHtml = pName + ';';//person
+        //});
+    //  });
+
+    //}
+    
+    
+    function send_data(){
+        
+        let not_json = {
+            type: document.querySelector('[name="type"]').value,
+            summ: document.querySelector('[name="summ"]').value,
+            fond: document.querySelector('[name="fond"]').value,
+            what: document.querySelector('[name="what"]').value,
+            person: document.querySelector('[name="person"]').value,
+            month: document.querySelector('[name="month"]').value,
+            month_number: document.querySelector('[name="month_number"]').value,
+            date: document.querySelector('[name="date"]').value,
+            comm: document.querySelector('[name="comm"]').value,
+        };
+        if(not_json['summ']==""){
+            alert("Суммы нет")
+        }
+        if(not_json['date']==""){
+            alert("Даты нет")
+        }
+         
+        fetch(urisend, {
+            method: 'POST', 
+            body: JSON.stringify(not_json),
+            headers: {
+            'Content-Type': 'application/json'
+        
+        }}) .then(response => response.json())
+
+    
+    .catch(error => console.error('Unable to add item.', error));
+    
+   }
+    
+
+
+  
 </script>
 
 <h1>@Model.Title </h1>

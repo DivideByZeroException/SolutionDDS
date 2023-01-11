@@ -32,9 +32,13 @@ namespace TestSwaggerApi.Controllers
         DateTime date,
         string comm)
         {
+            SaveData savedata = new SaveData(type, summ, fond, what,
+             person, month, month_number, date, comm);
             Console.WriteLine();
             //SaveData saveData = new SaveData()
             Console.WriteLine("Сработает СэйвКонтролер");
+
+            
         }
 
     }

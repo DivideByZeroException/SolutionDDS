@@ -32,11 +32,11 @@ namespace TestSwaggerApi.WEB
 
             });
 
-            services.AddSingleton<WeatherForecastClient>(sp =>
+            services.AddSingleton<GetResourceClient>(sp =>
             {
                 var fact = sp.GetRequiredService<IHttpClientFactory>();
                 var clnt = fact.CreateClient("Api");
-                return new WeatherForecastClient("http://localhost:5000", clnt);
+                return new GetResourceClient("http://localhost:5000", clnt);
             });
             services.AddSingleton<SaveDataClient>(sp =>
             {

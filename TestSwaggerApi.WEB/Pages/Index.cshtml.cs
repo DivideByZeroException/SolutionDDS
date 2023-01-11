@@ -21,9 +21,9 @@ namespace TestSwaggerApi.WEB.Pages
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
-        private readonly WeatherForecastClient weatherForecastClient;
+        private readonly GetResourceClient GetResourceClient;
         private readonly SaveDataClient SaveDataClient;
-        public ICollection<ICollection<object>> Weather;
+        public ICollection<ICollection<object>> Resourse;
       
         public string Title { get; private set; }
 
@@ -31,11 +31,11 @@ namespace TestSwaggerApi.WEB.Pages
 
         public IndexModel(
             ILogger<IndexModel> logger,
-            WeatherForecastClient weatherForecast,SaveDataClient saveDataClient)
+            GetResourceClient getResource, SaveDataClient saveDataClient)
         {
             _logger = logger;
             this.SaveDataClient = saveDataClient;
-            this.weatherForecastClient = weatherForecast;
+            this.GetResourceClient = getResource;
             
             
         }
@@ -46,69 +46,16 @@ namespace TestSwaggerApi.WEB.Pages
         public async Task OnGet()
         {
             
-            this.Weather = await this.weatherForecastClient.GetAsync();
+            this.Resourse = await this.GetResourceClient.GetAsync();
             
 
         }
         [HttpPost]
-        public async Task OnPost(string type,
-        int summ,
-        string fond,
-        string what,
-        string person,
-        string month,
-        string month_number,
-        DateTime date,
-        string comm)
+        public async Task OnPost(string type,int summ, string fond,string what,
+            string person,string month,string month_number,DateTime date,string comm)
         {
-           
-            
-
-
-            
-            
-
-                string[] Scopes = new string[] { SheetsService.Scope.Spreadsheets, DriveService.Scope.Drive };
-                string sheet = "ДДС";
-                string secondsheet = "Источники (списки)";
-                string id = "1r3UZ4Hh3d2FepCK3N2pBccXVh2YCek0bSYb8pR82G_w";
-
-                GoogleCredential credential;
-                using (var stream = new FileStream("cr1.json", FileMode.Open, FileAccess.Read))
-                {
-                    credential = GoogleCredential.FromStream(stream)
-                        .CreateScoped(Scopes);
-                }
-
-                // Create the service.
-                var service = new SheetsService(new BaseClientService.Initializer()
-                {
-                    HttpClientInitializer = credential,
-                    ApplicationName = "ItsTableProject",
-                });
-
-                var range1 = $"{sheet}!A:A";
-                var req1 = service.Spreadsheets.Values.Get(id, range1);
-                var res1 = req1.Execute();
-                int row = res1.Values.Count + 1;
-                var range = $"{sheet}!A{row}:I{row}";
-                Console.WriteLine(range);
-                var setValue = new List<List<object>> { new List<object> { type, summ, what, comm, person, month, date.ToString("dd.MM.yyyy"), fond, month_number } };
-                var req = service.Spreadsheets.Values.Update(
-
-                    new Google.Apis.Sheets.v4.Data.ValueRange { Values = new List<IList<object>>(setValue) }, "1r3UZ4Hh3d2FepCK3N2pBccXVh2YCek0bSYb8pR82G_w", range);
-                req.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.USERENTERED;
-                var res = req.Execute();
-                
-
-            
-
-
-
-
-        
-       
-
+            await this.SaveDataClient.PostAsync(type,  summ,  fond,  what,
+             person,  month,  month_number,  date,  comm);
         }
 
     }

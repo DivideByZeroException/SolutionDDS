@@ -10,8 +10,6 @@
 <h1>Its Table Project</h1>
 
 <form method="post" enctype="application/x-www-form-urlencoded">
-   
-       
     
 <div class=selected_items>
     <table class="table table-striped">
@@ -33,30 +31,29 @@
                 <td>
                     <select name=type>
 
-
-                        @for (int i = 1; i < @Model.Weather.ToList()[1].Count; i++)
+                        @for (int i = 1; i < @Model.Resourse.ToList()[1].Count; i++)
                         {
-                            @if (@Model.Weather.ToList()[@i].ToList()[1] != "")
+                            @if (@Model.Resourse.ToList()[@i].ToList()[1] != "")
                             {
-                                <option value="@Model.Weather.ToList()[@i].ToList()[1]">@Model.Weather.ToList()[@i].ToList()[1]</option>
+                                <option value="@Model.Resourse.ToList()[@i].ToList()[1]">@Model.Resourse.ToList()[@i].ToList()[1]</option>
                             }
                         }
                     </select>
                 </td>
                     
                 <td>
-                    <input type="number" name="summ">
+                    <input type="number" name="summ" required>
                 </td>
                    
                 <td>
                     <select name="fond">
 
 
-                        @for (int i = 1; i < @Model.Weather.ToList()[0].Count; i++)
+                        @for (int i = 1; i < @Model.Resourse.ToList()[0].Count; i++)
                         {
-                            @if (@Model.Weather.ToList()[@i].ToList()[0] != "")
+                            @if (@Model.Resourse.ToList()[@i].ToList()[0] != "")
                             {
-                                <option value="@Model.Weather.ToList()[@i].ToList()[0]">@Model.Weather.ToList()[@i].ToList()[0]</option>
+                                <option value="@Model.Resourse.ToList()[@i].ToList()[0]">@Model.Resourse.ToList()[@i].ToList()[0]</option>
                             }
                         }
                     </select>
@@ -64,11 +61,11 @@
 
                 <td>
                     <select name="what">
-                        @for(int i = 1; i <  @Model.Weather.ToList()[2].Count; i++)
+                        @for(int i = 1; i <  @Model.Resourse.ToList()[2].Count; i++)
                         {
-                            @if ( @Model.Weather.ToList()[@i].ToList()[2] != "")
+                            @if ( @Model.Resourse.ToList()[@i].ToList()[2] != "")
                             {
-                                <option>@Model.Weather.ToList()[@i].ToList()[2]</option>
+                                <option>@Model.Resourse.ToList()[@i].ToList()[2]</option>
                             }
                         }
                     </select>
@@ -78,11 +75,11 @@
                         <select name="person">
 
 
-                            @for (int i = 1; i < @Model.Weather.ToList()[4].Count; i++)
+                            @for (int i = 1; i < @Model.Resourse.ToList()[4].Count; i++)
                             {
-                                @if (@Model.Weather.ToList()[@i].ToList()[4] != "")
+                                @if (@Model.Resourse.ToList()[@i].ToList()[4] != "")
                                 {
-                                    <option>@Model.Weather.ToList()[@i].ToList()[4]</option>
+                                    <option>@Model.Resourse.ToList()[@i].ToList()[4]</option>
                                 }
                             }
                         </select>
@@ -92,11 +89,11 @@
                     <select name="month">
 
 
-                        @for (int i = 1; i < Model.Weather.ToList()[8].Count; i++)
+                        @for (int i = 1; i < Model.Resourse.ToList()[8].Count; i++)
                         {
-                            @if (@Model.Weather.ToList()[@i].ToList()[8] != "")
+                            @if (@Model.Resourse.ToList()[@i].ToList()[8] != "")
                             {
-                                <option>@Model.Weather.ToList()[@i].ToList()[8]</option>
+                                <option>@Model.Resourse.ToList()[@i].ToList()[8]</option>
                             }
                         }
                     </select>
@@ -106,18 +103,18 @@
                     <select name="month_number">
 
 
-                        @for (int i = 1; i < Model.Weather.ToList()[9].Count; i++)
+                        @for (int i = 1; i < Model.Resourse.ToList()[9].Count; i++)
                         {
-                            @if (@Model.Weather.ToList()[@i].ToList()[9] != "")
+                            @if (@Model.Resourse.ToList()[@i].ToList()[9] != "")
                             {
-                                <option>@Model.Weather.ToList()[@i].ToList()[9]</option>
+                                <option>@Model.Resourse.ToList()[@i].ToList()[9]</option>
                             }
                         }
                     </select>
                 </td>
 
                 <td>
-                    <input type="date" name="date">
+                    <input type="date" name="date" required>
                 </td>
 
                 <td>

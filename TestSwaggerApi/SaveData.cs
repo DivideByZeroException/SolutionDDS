@@ -36,9 +36,9 @@ namespace TestSwaggerApi
             string res = ok(type, summ, fond,  what,  person,  month,  month_number,  date,  comm);
         }
 
-        public static string ok(string type, int summ, string fond, string what, string person, string month, string month_number, DateTime date, string comm)
+        public static string ok(string type, int summ, string fond, string what, string person, string month, string month_number, DateTime date , string comm)
         {
-
+            
             string[] Scopes = new string[] { SheetsService.Scope.Spreadsheets, DriveService.Scope.Drive };
             string sheet = "ДДС";
             string secondsheet = "Источники (списки)";
@@ -70,6 +70,7 @@ namespace TestSwaggerApi
                 new Google.Apis.Sheets.v4.Data.ValueRange { Values = new List<IList<object>>(setValue) }, "1r3UZ4Hh3d2FepCK3N2pBccXVh2YCek0bSYb8pR82G_w", range);
             req.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.USERENTERED;
             var res = req.Execute();
+            
             return "OK";
             
         }

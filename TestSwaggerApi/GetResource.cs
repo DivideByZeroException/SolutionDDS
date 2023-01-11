@@ -8,7 +8,7 @@ using System.IO;
 
 namespace TestSwaggerApi
 {
-    public class WeatherForecast
+    public class GetResource
     {
         List<string> like = new List<string>();
         string fond = "Фонд основателя";

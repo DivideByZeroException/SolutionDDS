@@ -17,13 +17,13 @@ namespace TestSwaggerApi.Client
     using System = global::System;
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.14.8.0 (NJsonSchema v10.5.2.0 (Newtonsoft.Json v12.0.0.0))")]
-    public partial class SaveDataClient 
+    public partial class GetResourceClient 
     {
         private string _baseUrl = "";
         private System.Net.Http.HttpClient _httpClient;
         private System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings;
     
-        public SaveDataClient(string baseUrl, System.Net.Http.HttpClient httpClient)
+        public GetResourceClient(string baseUrl, System.Net.Http.HttpClient httpClient)
         {
             BaseUrl = baseUrl;
             _httpClient = httpClient;
@@ -52,22 +52,17 @@ namespace TestSwaggerApi.Client
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task PostAsync(string title)
+        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<object>>> GetAsync()
         {
-            return PostAsync(title, System.Threading.CancellationToken.None);
+            return GetAsync(System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task PostAsync(string title, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<object>>> GetAsync(System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/SaveData?");
-            if (title != null)
-            {
-                urlBuilder_.Append(System.Uri.EscapeDataString("title") + "=").Append(System.Uri.EscapeDataString(ConvertToString(title, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            }
-            urlBuilder_.Length--;
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/GetResource");
     
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -75,8 +70,8 @@ namespace TestSwaggerApi.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/json");
-                    request_.Method = new System.Net.Http.HttpMethod("POST");
+                    request_.Method = new System.Net.Http.HttpMethod("GET");
+                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
     
                     PrepareRequest(client_, request_, urlBuilder_);
     
@@ -101,7 +96,12 @@ namespace TestSwaggerApi.Client
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            return;
+                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<object>>>(response_, headers_, cancellationToken).ConfigureAwait(false);
+                            if (objectResponse_.Object == null)
+                            {
+                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
+                            }
+                            return objectResponse_.Object;
                         }
                         else
                         {
@@ -227,13 +227,13 @@ namespace TestSwaggerApi.Client
     }
     
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.14.8.0 (NJsonSchema v10.5.2.0 (Newtonsoft.Json v12.0.0.0))")]
-    public partial class WeatherForecastClient 
+    public partial class SaveDataClient 
     {
         private string _baseUrl = "";
         private System.Net.Http.HttpClient _httpClient;
         private System.Lazy<Newtonsoft.Json.JsonSerializerSettings> _settings;
     
-        public WeatherForecastClient(string baseUrl, System.Net.Http.HttpClient httpClient)
+        public SaveDataClient(string baseUrl, System.Net.Http.HttpClient httpClient)
         {
             BaseUrl = baseUrl;
             _httpClient = httpClient;
@@ -262,17 +262,54 @@ namespace TestSwaggerApi.Client
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task<System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<object>>> GetAsync()
+        public System.Threading.Tasks.Task PostAsync(string type, int? summ, string fond, string what, string person, string month, string month_number, System.DateTimeOffset? date, string comm)
         {
-            return GetAsync(System.Threading.CancellationToken.None);
+            return PostAsync(type, summ, fond, what, person, month, month_number, date, comm, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task<System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<object>>> GetAsync(System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task PostAsync(string type, int? summ, string fond, string what, string person, string month, string month_number, System.DateTimeOffset? date, string comm, System.Threading.CancellationToken cancellationToken)
         {
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/WeatherForecast");
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/SaveData?");
+            if (type != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("type") + "=").Append(System.Uri.EscapeDataString(ConvertToString(type, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (summ != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("summ") + "=").Append(System.Uri.EscapeDataString(ConvertToString(summ, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (fond != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("fond") + "=").Append(System.Uri.EscapeDataString(ConvertToString(fond, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (what != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("what") + "=").Append(System.Uri.EscapeDataString(ConvertToString(what, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (person != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("person") + "=").Append(System.Uri.EscapeDataString(ConvertToString(person, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (month != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("month") + "=").Append(System.Uri.EscapeDataString(ConvertToString(month, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (month_number != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("month_number") + "=").Append(System.Uri.EscapeDataString(ConvertToString(month_number, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (date != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("date") + "=").Append(System.Uri.EscapeDataString(date.Value.ToString("s", System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            if (comm != null)
+            {
+                urlBuilder_.Append(System.Uri.EscapeDataString("comm") + "=").Append(System.Uri.EscapeDataString(ConvertToString(comm, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
+            }
+            urlBuilder_.Length--;
     
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -280,8 +317,8 @@ namespace TestSwaggerApi.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    request_.Method = new System.Net.Http.HttpMethod("GET");
-                    request_.Headers.Accept.Add(System.Net.Http.Headers.MediaTypeWithQualityHeaderValue.Parse("application/json"));
+                    request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/json");
+                    request_.Method = new System.Net.Http.HttpMethod("POST");
     
                     PrepareRequest(client_, request_, urlBuilder_);
     
@@ -306,12 +343,7 @@ namespace TestSwaggerApi.Client
                         var status_ = (int)response_.StatusCode;
                         if (status_ == 200)
                         {
-                            var objectResponse_ = await ReadObjectResponseAsync<System.Collections.Generic.ICollection<System.Collections.Generic.ICollection<object>>>(response_, headers_, cancellationToken).ConfigureAwait(false);
-                            if (objectResponse_.Object == null)
-                            {
-                                throw new ApiException("Response was null which was not expected.", status_, objectResponse_.Text, headers_, null);
-                            }
-                            return objectResponse_.Object;
+                            return;
                         }
                         else
                         {

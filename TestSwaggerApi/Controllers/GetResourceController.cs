@@ -9,13 +9,13 @@ namespace TestSwaggerApi.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
+    public class GetResourceController : ControllerBase
     {
        
 
-        private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ILogger<GetResourceController> _logger;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public GetResourceController(ILogger<GetResourceController> logger)
         {
             _logger = logger;
         }
@@ -23,8 +23,8 @@ namespace TestSwaggerApi.Controllers
         [HttpGet]
         public IList<IList<object>> Get()
         {
-            WeatherForecast weatherForecast = new WeatherForecast();
-            return weatherForecast.Val;
+            GetResource getResource = new GetResource();
+            return getResource.Val;
         }
     }
 }

@@ -262,54 +262,20 @@ namespace TestSwaggerApi.Client
         partial void PrepareRequest(System.Net.Http.HttpClient client, System.Net.Http.HttpRequestMessage request, System.Text.StringBuilder urlBuilder);
         partial void ProcessResponse(System.Net.Http.HttpClient client, System.Net.Http.HttpResponseMessage response);
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public System.Threading.Tasks.Task PostAsync(string type, int? summ, string fond, string what, string person, string month, string month_number, System.DateTimeOffset? date, string comm)
+        public System.Threading.Tasks.Task PostFromCLientAsync(DDSDataRow data)
         {
-            return PostAsync(type, summ, fond, what, person, month, month_number, date, comm, System.Threading.CancellationToken.None);
+            return PostFromCLientAsync(data, System.Threading.CancellationToken.None);
         }
     
         /// <param name="cancellationToken">A cancellation token that can be used by other objects or threads to receive notice of cancellation.</param>
         /// <exception cref="ApiException">A server side error occurred.</exception>
-        public async System.Threading.Tasks.Task PostAsync(string type, int? summ, string fond, string what, string person, string month, string month_number, System.DateTimeOffset? date, string comm, System.Threading.CancellationToken cancellationToken)
+        public async System.Threading.Tasks.Task PostFromCLientAsync(DDSDataRow data, System.Threading.CancellationToken cancellationToken)
         {
+            if (data == null)
+                throw new System.ArgumentNullException("data");
+    
             var urlBuilder_ = new System.Text.StringBuilder();
-            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/SaveData?");
-            if (type != null)
-            {
-                urlBuilder_.Append(System.Uri.EscapeDataString("type") + "=").Append(System.Uri.EscapeDataString(ConvertToString(type, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            }
-            if (summ != null)
-            {
-                urlBuilder_.Append(System.Uri.EscapeDataString("summ") + "=").Append(System.Uri.EscapeDataString(ConvertToString(summ, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            }
-            if (fond != null)
-            {
-                urlBuilder_.Append(System.Uri.EscapeDataString("fond") + "=").Append(System.Uri.EscapeDataString(ConvertToString(fond, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            }
-            if (what != null)
-            {
-                urlBuilder_.Append(System.Uri.EscapeDataString("what") + "=").Append(System.Uri.EscapeDataString(ConvertToString(what, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            }
-            if (person != null)
-            {
-                urlBuilder_.Append(System.Uri.EscapeDataString("person") + "=").Append(System.Uri.EscapeDataString(ConvertToString(person, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            }
-            if (month != null)
-            {
-                urlBuilder_.Append(System.Uri.EscapeDataString("month") + "=").Append(System.Uri.EscapeDataString(ConvertToString(month, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            }
-            if (month_number != null)
-            {
-                urlBuilder_.Append(System.Uri.EscapeDataString("month_number") + "=").Append(System.Uri.EscapeDataString(ConvertToString(month_number, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            }
-            if (date != null)
-            {
-                urlBuilder_.Append(System.Uri.EscapeDataString("date") + "=").Append(System.Uri.EscapeDataString(date.Value.ToString("s", System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            }
-            if (comm != null)
-            {
-                urlBuilder_.Append(System.Uri.EscapeDataString("comm") + "=").Append(System.Uri.EscapeDataString(ConvertToString(comm, System.Globalization.CultureInfo.InvariantCulture))).Append("&");
-            }
-            urlBuilder_.Length--;
+            urlBuilder_.Append(BaseUrl != null ? BaseUrl.TrimEnd('/') : "").Append("/SaveData");
     
             var client_ = _httpClient;
             var disposeClient_ = false;
@@ -317,7 +283,9 @@ namespace TestSwaggerApi.Client
             {
                 using (var request_ = new System.Net.Http.HttpRequestMessage())
                 {
-                    request_.Content = new System.Net.Http.StringContent(string.Empty, System.Text.Encoding.UTF8, "application/json");
+                    var content_ = new System.Net.Http.StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(data, _settings.Value));
+                    content_.Headers.ContentType = System.Net.Http.Headers.MediaTypeHeaderValue.Parse("application/json");
+                    request_.Content = content_;
                     request_.Method = new System.Net.Http.HttpMethod("POST");
     
                     PrepareRequest(client_, request_, urlBuilder_);
@@ -468,7 +436,38 @@ namespace TestSwaggerApi.Client
         }
     }
 
+    [System.CodeDom.Compiler.GeneratedCode("NJsonSchema", "10.5.2.0 (Newtonsoft.Json v12.0.0.0)")]
+    public partial class DDSDataRow 
+    {
+        [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Type { get; set; }
     
+        [Newtonsoft.Json.JsonProperty("summ", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Summ { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("fond", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Fond { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("what", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string What { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("person", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Person { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("month", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Month { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("month_number", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Month_number { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("date", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public System.DateTimeOffset Date { get; set; }
+    
+        [Newtonsoft.Json.JsonProperty("comm", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string Comm { get; set; }
+    
+    
+    }
 
     [System.CodeDom.Compiler.GeneratedCode("NSwag", "13.14.8.0 (NJsonSchema v10.5.2.0 (Newtonsoft.Json v12.0.0.0))")]
     public partial class ApiException : System.Exception

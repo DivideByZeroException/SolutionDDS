@@ -11,45 +11,21 @@ namespace TestSwaggerApi.Controllers
     [Route("[controller]")]
     public class SaveDataController : ControllerBase
     {
-
-        
+     
         private readonly ILogger<SaveDataController> _logger;
 
         public SaveDataController(ILogger<SaveDataController> logger)
         {
             _logger = logger;
         }
-
-
-        //[HttpPost]
-        //public void Post(string type,
-        //int summ,
-        //string fond,
-        //string what,
-        //string person,
-        //string month,
-        //string month_number,
-        //DateTime date,
-        //string comm)
-        //{
-        //    SaveData savedata = new SaveData(type, summ, fond, what,
-        //     person, month, month_number, date, comm);
-        //    Console.WriteLine();
-        //    //SaveData saveData = new SaveData()
-        //    Console.WriteLine("Сработает СэйвКонтролер");
-
-
-        //}
-
         [HttpPost]
         public void PostFromCLient(DDSDataRow data)
         {
             WorkWithExcel workWith = new WorkWithExcel();
             workWith.Save(data.Type, data.Summ, data.Fond, data.What,
              data.Person, data.Month, data.Month_number, data.Date, data.Comm);
-    
+
 
         }
-
     }
 }

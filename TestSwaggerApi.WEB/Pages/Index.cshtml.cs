@@ -24,12 +24,6 @@ namespace TestSwaggerApi.WEB.Pages
         private readonly GetResourceClient GetResourceClient;
         private readonly SaveDataClient SaveDataClient;
         public ICollection<ICollection<object>> Resourse;
-        
-        
-      
-        public string Title { get; private set; }
-
-        private string SaveResult;
 
         public IndexModel(
             ILogger<IndexModel> logger,
@@ -38,11 +32,7 @@ namespace TestSwaggerApi.WEB.Pages
             _logger = logger;
             this.SaveDataClient = saveDataClient;
             this.GetResourceClient = getResource;
-            
-            
         }
-
-       
 
         [HttpGet]
         public async Task OnGet()
@@ -53,9 +43,7 @@ namespace TestSwaggerApi.WEB.Pages
         [HttpPost]
         public async Task OnPost(DDSDataRow data)
         {
-            await this.SaveDataClient.PostAsync(data.Type, data.Summ, data.Fond, data.What,
-             data.Person, data.Month, data.Month_number, data.Date, data.Comm);
+            
         }
-
     }
 }

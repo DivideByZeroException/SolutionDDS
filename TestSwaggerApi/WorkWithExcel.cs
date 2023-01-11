@@ -11,44 +11,10 @@ namespace TestSwaggerApi
 {
     public class WorkWithExcel
     {
-
-
-            public IList<IList<object>> GetResourse()
-            {
-
-                // Create the service.
-                string[] Scopes = new string[] { SheetsService.Scope.Spreadsheets, DriveService.Scope.Drive };
-                string sheet = "ДДС";
-                string secondsheet = "Источники (списки)";
-                string id = "1r3UZ4Hh3d2FepCK3N2pBccXVh2YCek0bSYb8pR82G_w";
-
-                GoogleCredential credential;
-                using (var stream = new FileStream("cr1.json", FileMode.Open, FileAccess.Read))
-                {
-                    credential = GoogleCredential.FromStream(stream)
-                        .CreateScoped(Scopes);
-                }
-
-                // Create the service.
-                var service = new SheetsService(new BaseClientService.Initializer()
-                {
-                    HttpClientInitializer = credential,
-                    ApplicationName = "ItsTableProject",
-                });
-                var range = $"{secondsheet}!A:J";
-                var req = service.Spreadsheets.Values.Get(id, range);
-                var res = req.Execute();
-                var val = res.Values;
-                return val;
-
-
-        }
-
-
-
-        public string Save(string type, int summ, string fond, string what, string person, string month, string month_number, DateTime date, string comm)
+        public IList<IList<object>> GetResourse()
         {
 
+            // Create the service.
             string[] Scopes = new string[] { SheetsService.Scope.Spreadsheets, DriveService.Scope.Drive };
             string sheet = "ДДС";
             string secondsheet = "Источники (списки)";
@@ -67,6 +33,32 @@ namespace TestSwaggerApi
                 HttpClientInitializer = credential,
                 ApplicationName = "ItsTableProject",
             });
+            var range = $"{secondsheet}!A:J";
+            var req = service.Spreadsheets.Values.Get(id, range);
+            var res = req.Execute();
+            var val = res.Values;
+            return val;
+        }
+        public string Save(string type, int summ, string fond, string what, string person, string month, string month_number, DateTime date, string comm)
+        {
+
+            string[] Scopes = new string[] { SheetsService.Scope.Spreadsheets, DriveService.Scope.Drive };
+            string sheet = "ДДС";
+            string secondsheet = "Источники (списки)";
+            string id = "1r3UZ4Hh3d2FepCK3N2pBccXVh2YCek0bSYb8pR82G_w";
+
+            GoogleCredential credential;
+            using (var stream = new FileStream("cr1.json", FileMode.Open, FileAccess.Read))
+            {
+                credential = GoogleCredential.FromStream(stream)
+                    .CreateScoped(Scopes);
+            }
+
+            var service = new SheetsService(new BaseClientService.Initializer()
+            {
+                HttpClientInitializer = credential,
+                ApplicationName = "ItsTableProject",
+            });
 
             var range1 = $"{sheet}!A:A";
             var req1 = service.Spreadsheets.Values.Get(id, range1);
@@ -75,24 +67,13 @@ namespace TestSwaggerApi
             var range = $"{sheet}!A{row}:I{row}";
             Console.WriteLine(range);
             var setValue = new List<List<object>> { new List<object> { type, summ, what, comm, person, month, date.ToString("dd.MM.yyyy"), fond, month_number } };
-            var req = service.Spreadsheets.Values.Update(
-
-                new Google.Apis.Sheets.v4.Data.ValueRange { Values = new List<IList<object>>(setValue) }, "1r3UZ4Hh3d2FepCK3N2pBccXVh2YCek0bSYb8pR82G_w", range);
+            var req = service.Spreadsheets.Values.Update(new Google.Apis.Sheets.v4.Data.ValueRange { Values = new List<IList<object>>(setValue) }, "1r3UZ4Hh3d2FepCK3N2pBccXVh2YCek0bSYb8pR82G_w", range);
             req.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.USERENTERED;
             var res = req.Execute();
 
             return "OK";
         }
-
-        
-
-
-
-
-     }
-
-
-
+    }
 
 }
 

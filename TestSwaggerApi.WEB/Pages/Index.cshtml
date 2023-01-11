@@ -2,7 +2,7 @@
 @model IndexModel
 @{
     //ViewData["Title"] = "Home page";
-    
+
 }
 
 
@@ -10,7 +10,7 @@
 <h1>Its Table Project</h1>
 
 <form method="post" enctype="application/x-www-form-urlencoded">
-    
+
 <div class=selected_items>
     <table class="table table-striped">
         <thead class="table-dark">
@@ -31,11 +31,11 @@
                 <td>
                     <select name=type></select>
                 </td>
-                    
+
                 <td>
                     <input type="number" name="summ" required>
                 </td>
-                   
+
                 <td>
                     <select name="fond"></select>
                 </td>
@@ -82,7 +82,7 @@
 
     let items = getItems();
     function sortItems(data){
-        
+
         let type_box = document.querySelector('[name="type"]')
         let types = []
         for (let i = 1; i < data[1].length; i++)
@@ -151,37 +151,15 @@
         }
     }
 
-
-
     function getItems() {
       fetch(uriget)
         .then(response => response.json())
         .then(data => sortItems(data))
         .catch(error => console.error('Unable to get items.', error));
-        
     }
-     
-    //function _displayItems(data) {
-    //  const holderBody = document.getElementById('data-holder');
-    //  holderBody.innerHTML = '';
 
-    //  data.forEach(item => {
-    //    console.log("item", item);
-    //    let dataSpan = document.createElement('span');
-    //    dataSpan.textContent = item[4] + ';';//person
-    //    holderBody.appendChild(dataSpan);
-        //let persons = item[4];
-        //console.log('persons ',persons);
-        //persons.forEach(pName => {
-        //    dataSpan.innerHtml = pName + ';';//person
-        //});
-    //  });
-
-    //}
-    
-    
     function send_data(){
-        
+
         let not_json = {
             type: document.querySelector('[name="type"]').value,
             summ: document.querySelector('[name="summ"]').value,
@@ -199,23 +177,19 @@
         if(not_json['date']==""){
             alert("Даты нет")
         }
-         
+
         fetch(urisend, {
             method: 'POST', 
             body: JSON.stringify(not_json),
             headers: {
             'Content-Type': 'application/json'
-        
+
         }}) .then(response => response.json())
 
-    
+
     .catch(error => console.error('Unable to add item.', error));
-    
+
    }
-    
-
-
-  
 </script>
 
-<h1>@Model.Title </h1>
+

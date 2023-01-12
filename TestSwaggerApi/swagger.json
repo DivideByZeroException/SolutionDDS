@@ -6,108 +6,12 @@
     "version": "1.0.0"
   },
   "paths": {
-    "/SaveData": {
-      "post": {
-        "tags": [
-          "SaveData"
-        ],
-        "operationId": "SaveData_Post",
-        "parameters": [
-          {
-            "name": "type",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            },
-            "x-position": 1
-          },
-          {
-            "name": "summ",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "x-position": 2
-          },
-          {
-            "name": "fond",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            },
-            "x-position": 3
-          },
-          {
-            "name": "what",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            },
-            "x-position": 4
-          },
-          {
-            "name": "person",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            },
-            "x-position": 5
-          },
-          {
-            "name": "month",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            },
-            "x-position": 6
-          },
-          {
-            "name": "month_number",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            },
-            "x-position": 7
-          },
-          {
-            "name": "date",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "format": "date-time"
-            },
-            "x-position": 8
-          },
-          {
-            "name": "comm",
-            "in": "query",
-            "schema": {
-              "type": "string",
-              "nullable": true
-            },
-            "x-position": 9
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": ""
-          }
-        }
-      }
-    },
-    "/WeatherForecast": {
+    "/GetResource": {
       "get": {
         "tags": [
-          "WeatherForecast"
+          "GetResource"
         ],
-        "operationId": "WeatherForecast_Get",
+        "operationId": "GetResource_Get",
         "responses": {
           "200": {
             "description": "",
@@ -125,7 +29,77 @@
           }
         }
       }
+    },
+    "/SaveData": {
+      "post": {
+        "tags": [
+          "SaveData"
+        ],
+        "operationId": "SaveData_PostFromCLient",
+        "requestBody": {
+          "x-name": "data",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/DDSDataRow"
+              }
+            }
+          },
+          "required": true,
+          "x-position": 1
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
     }
   },
-  "components": {}
+  "components": {
+    "schemas": {
+      "DDSDataRow": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "summ": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "fond": {
+            "type": "string",
+            "nullable": true
+          },
+          "what": {
+            "type": "string",
+            "nullable": true
+          },
+          "person": {
+            "type": "string",
+            "nullable": true
+          },
+          "month": {
+            "type": "string",
+            "nullable": true
+          },
+          "month_number": {
+            "type": "string",
+            "nullable": true
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "comm": {
+            "type": "string",
+            "nullable": true
+          }
+        }
+      }
+    }
+  }
 }

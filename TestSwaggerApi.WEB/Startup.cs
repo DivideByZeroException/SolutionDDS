@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using System.Web.Http;
 using TestSwaggerApi.Client;
 
 namespace TestSwaggerApi.WEB
@@ -17,7 +18,9 @@ namespace TestSwaggerApi.WEB
     {
         public Startup(IConfiguration configuration)
         {
+            
             Configuration = configuration;
+            
         }
 
         public IConfiguration Configuration { get; }
@@ -32,11 +35,11 @@ namespace TestSwaggerApi.WEB
 
             });
 
-            services.AddSingleton<WeatherForecastClient>(sp =>
+            services.AddSingleton<GetResourceClient>(sp =>
             {
                 var fact = sp.GetRequiredService<IHttpClientFactory>();
                 var clnt = fact.CreateClient("Api");
-                return new WeatherForecastClient("http://localhost:5000", clnt);
+                return new GetResourceClient("http://localhost:5000", clnt);
             });
             services.AddSingleton<SaveDataClient>(sp =>
             {

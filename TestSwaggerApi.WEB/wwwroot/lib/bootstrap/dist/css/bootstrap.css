@@ -10031,4 +10031,7 @@ a.text-dark:hover, a.text-dark:focus {
     border-color: #dee2e6;
   }
 }
+.sender_btn {
+    color: red;
+}
 /*# sourceMappingURL=bootstrap.css.map */

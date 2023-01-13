@@ -21,29 +21,13 @@ namespace TestSwaggerApi.WEB.Pages
     public class IndexModel : PageModel
     {
         private readonly ILogger<IndexModel> _logger;
-        private readonly GetResourceClient GetResourceClient;
-        private readonly SaveDataClient SaveDataClient;
-        public ICollection<ICollection<object>> Resourse;
 
-        public IndexModel(
-            ILogger<IndexModel> logger,
-            GetResourceClient getResource, SaveDataClient saveDataClient)
+        public IndexModel(ILogger<IndexModel> logger)
         {
             _logger = logger;
-            this.SaveDataClient = saveDataClient;
-            this.GetResourceClient = getResource;
+           
         }
 
-        [HttpGet]
-        public async Task OnGet()
-        {
-            
-            this.Resourse = await this.GetResourceClient.GetAsync();
-        }
-        [HttpPost]
-        public async Task OnPost(DDSDataRow data)
-        {
-            
-        }
+
     }
 }

@@ -39,9 +39,8 @@ namespace TestSwaggerApi
             var val = res.Values;
             return val;
         }
-        public string Save(string type, int summ, string fond, string what, string person, string month, string month_number, DateTime date, string comm)
+        public string Save(string type, int sum, string fond, string what, string person, string month, string numberMonth, DateTime date, string comm)
         {
-
             string[] Scopes = new string[] { SheetsService.Scope.Spreadsheets, DriveService.Scope.Drive };
             string sheet = "ДДС";
             string secondsheet = "Источники (списки)";
@@ -66,7 +65,7 @@ namespace TestSwaggerApi
             int row = res1.Values.Count + 1;
             var range = $"{sheet}!A{row}:I{row}";
             Console.WriteLine(range);
-            var setValue = new List<List<object>> { new List<object> { type, summ, what, comm, person, month, date.ToString("dd.MM.yyyy"), fond, month_number } };
+            var setValue = new List<List<object>> { new List<object> { type, sum, what, comm, person, month, date.ToString("dd.MM.yyyy"), fond, numberMonth } };
             var req = service.Spreadsheets.Values.Update(new Google.Apis.Sheets.v4.Data.ValueRange { Values = new List<IList<object>>(setValue) }, "1r3UZ4Hh3d2FepCK3N2pBccXVh2YCek0bSYb8pR82G_w", range);
             req.ValueInputOption = SpreadsheetsResource.ValuesResource.UpdateRequest.ValueInputOptionEnum.USERENTERED;
             var res = req.Execute();
@@ -74,6 +73,5 @@ namespace TestSwaggerApi
             return "OK";
         }
     }
-
 }
 

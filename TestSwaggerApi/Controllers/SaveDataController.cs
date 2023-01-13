@@ -11,9 +11,7 @@ namespace TestSwaggerApi.Controllers
     [Route("[controller]")]
     public class SaveDataController : ControllerBase
     {
-     
         private readonly ILogger<SaveDataController> _logger;
-
         public SaveDataController(ILogger<SaveDataController> logger)
         {
             _logger = logger;
@@ -21,11 +19,10 @@ namespace TestSwaggerApi.Controllers
         [HttpPost]
         public void PostFromCLient(DDSDataRow data)
         {
-            WorkWithExcel workWith = new WorkWithExcel();
-            workWith.Save(data.Type, data.Summ, data.Fond, data.What,
-             data.Person, data.Month, data.Month_number, data.Date, data.Comm);
-
-
+            
+            WorkWithExcel workWithExcel = new WorkWithExcel();
+            workWithExcel.Save(data.Type, data.Sum, data.Fond, data.What,
+             data.Person, data.Month, data.NumberMonth, data.Date, data.Comm);
         }
     }
 }

@@ -5,10 +5,6 @@
 
 }
 
-
-
-<h1>Its Table Project</h1>
-
 <form method="post" enctype="application/x-www-form-urlencoded">
 
 <div class=selected_items>
@@ -33,7 +29,7 @@
                 </td>
 
                 <td>
-                    <input type="number" name="summ" required>
+                    <input type="number" name="sum" required>
                 </td>
 
                 <td>
@@ -53,7 +49,7 @@
                 </td>
 
                 <td>
-                    <select name="month_number"> </select>
+                    <select name="numberMonth"> </select>
                 </td>
 
                 <td>
@@ -68,10 +64,8 @@
     </table>
 </div>
 
-
-    @*<input type="submit" value="Отправить" />*@
 </form>
-<p class="sender_btn" value="Отправить" onclick="send_data()"/>Сохранить</p>
+<input type="button" class="sender_btn" value="Отправить" onclick="send_data()"/>
 <div id="data-holder"></div>
 
  <script type="text/javascript">
@@ -82,15 +76,21 @@
 
     let items = getItems();
     function sortItems(data){
-
+        let indexType = data[0].indexOf("Тип")
+        let indexFond = data[0].indexOf("Фонд")
+        let indexPerson = data[0].indexOf("Персона")
+        let indexWhat = data[0].indexOf("Что")
+        let indexMonth = data[0].indexOf("месяц")
+        let indexNumberMonth = data[0].indexOf("месяц - номер")    
+       
         let type_box = document.querySelector('[name="type"]')
         let types = []
         for (let i = 1; i < data[1].length; i++)
         {
-            if (data[i][1] != "")
+            if (data[i][0] != "")
             {
-                types.push(data[i][1])
-                let newOption = new Option(data[i][1], data[i][1]);
+                types.push(data[i][indexType])
+                let newOption = new Option(data[i][indexType], data[i][indexType]);
                 type_box.append(newOption);
             }
         }
@@ -100,8 +100,8 @@
         {
             if (data[i][0] != "")
             {
-                fonds.push(data[i][0])
-                let newOption = new Option(data[i][0], data[i][0]);
+                fonds.push(data[i][indexFond])
+                let newOption = new Option(data[i][indexFond], data[i][indexFond]);
                 fond_box.append(newOption);
             }
         }
@@ -111,8 +111,8 @@
         {
             if (data[i][2] != "")
             {
-                whats.push(data[i][2])
-                let newOption = new Option(data[i][2], data[i][2]);
+                whats.push(data[i][indexWhat])
+                let newOption = new Option(data[i][indexWhat], data[i][indexWhat]);
                 what_box.append(newOption);
             }
         }
@@ -122,8 +122,8 @@
         {
             if (data[i][4] != "")
             {
-                persons.push(data[i][4])
-                let newOption = new Option(data[i][4], data[i][4]);
+                persons.push(data[i][indexPerson])
+                let newOption = new Option(data[i][indexPerson], data[i][indexPerson]);
                 person_box.append(newOption);
             }
         }
@@ -133,19 +133,19 @@
         {
             if (data[i][8] != "")
             {
-                months.push(data[i][8])
-                let newOption = new Option(data[i][8], data[i][8]);
+                months.push(data[i][indexMonth])
+                let newOption = new Option(data[i][indexMonth], data[i][indexMonth]);
                 months_box.append(newOption);
             }
         }
-        let months_number_box = document.querySelector('[name="month_number"]')
+        let months_number_box = document.querySelector('[name="numberMonth"]')
         let number_months = []
         for (let i = 1; i < data[9].length; i++)
         {
             if (data[i][9] != "")
             {
-                number_months.push(data[i][9])
-                let newOption = new Option(data[i][9], data[i][9]);
+                number_months.push(data[i][indexNumberMonth])
+                let newOption = new Option(data[i][indexNumberMonth], data[i][indexNumberMonth]);
                 months_number_box.append(newOption);
             }
         }
@@ -160,36 +160,37 @@
 
     function send_data(){
 
-        let not_json = {
+        let arrayWithData = {
             type: document.querySelector('[name="type"]').value,
-            summ: document.querySelector('[name="summ"]').value,
+            sum: document.querySelector('[name="sum"]').value,
             fond: document.querySelector('[name="fond"]').value,
             what: document.querySelector('[name="what"]').value,
             person: document.querySelector('[name="person"]').value,
             month: document.querySelector('[name="month"]').value,
-            month_number: document.querySelector('[name="month_number"]').value,
+            numberMonth: document.querySelector('[name="numberMonth"]').value,
             date: document.querySelector('[name="date"]').value,
-            comm: document.querySelector('[name="comm"]').value,
+            comm: document.querySelector('[name="comm"]').value
         };
-        if(not_json['summ']==""){
+        if(arrayWithData['sum']==""){
             alert("Суммы нет")
+            return
         }
-        if(not_json['date']==""){
+        if(arrayWithData['date']==""){
             alert("Даты нет")
+            return
         }
-
-        fetch(urisend, {
+        console.log(JSON.stringify(arrayWithData))
+        fetch(urisend, 
+            {
             method: 'POST', 
-            body: JSON.stringify(not_json),
+            body: JSON.stringify(arrayWithData),
             headers: {
             'Content-Type': 'application/json'
-
-        }}) .then(response => response.json())
-
-
-    .catch(error => console.error('Unable to add item.', error));
-
-   }
+                }
+            }
+        )
+        .catch(error => console.error('Unable to add item.', error))
+    }
 </script>
 
 

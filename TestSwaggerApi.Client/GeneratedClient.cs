@@ -442,8 +442,8 @@ namespace TestSwaggerApi.Client
         [Newtonsoft.Json.JsonProperty("type", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Type { get; set; }
     
-        [Newtonsoft.Json.JsonProperty("summ", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public int Summ { get; set; }
+        [Newtonsoft.Json.JsonProperty("sum", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public int Sum { get; set; }
     
         [Newtonsoft.Json.JsonProperty("fond", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Fond { get; set; }
@@ -457,8 +457,8 @@ namespace TestSwaggerApi.Client
         [Newtonsoft.Json.JsonProperty("month", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public string Month { get; set; }
     
-        [Newtonsoft.Json.JsonProperty("month_number", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
-        public string Month_number { get; set; }
+        [Newtonsoft.Json.JsonProperty("numberMonth", Required = Newtonsoft.Json.Required.Default, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
+        public string NumberMonth { get; set; }
     
         [Newtonsoft.Json.JsonProperty("date", Required = Newtonsoft.Json.Required.DisallowNull, NullValueHandling = Newtonsoft.Json.NullValueHandling.Ignore)]
         public System.DateTimeOffset Date { get; set; }

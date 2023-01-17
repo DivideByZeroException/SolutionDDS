@@ -35,10 +35,7 @@ namespace TestSwaggerApi
                        .AllowAnyMethod()
                        .AllowAnyHeader();
             }));
-            //services.AddSwaggerGen(c =>
-            //{
-            //    c.SwaggerDoc("v1", new OpenApiInfo { Title = "TestSwaggerApi", Version = "v1" });
-            //});
+            
 
             services.AddOpenApiDocument();
         }
@@ -49,8 +46,7 @@ namespace TestSwaggerApi
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                //app.UseSwagger();
-                //app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TestSwaggerApi v1"));
+                
             }
 
             app.UseCors("MyPolicy");

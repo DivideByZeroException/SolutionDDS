@@ -23,8 +23,8 @@ namespace TestSwaggerApi.Controllers
         [HttpGet]
         public IList<IList<object>> Get()
         {
-            WorkWithExcel workWith = new WorkWithExcel();
-            var val = workWith.GetResourse();
+            WorkWithExcel workWithExcel = new WorkWithExcel();
+            var val = workWithExcel.GetResourse();
             return val;
         }
     }

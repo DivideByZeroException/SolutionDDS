@@ -6,15 +6,12 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-
 namespace TestSwaggerApi
 {
     public class WorkWithExcel
     {
         public IList<IList<object>> GetResourse()
         {
-
-            // Create the service.
             string[] Scopes = new string[] { SheetsService.Scope.Spreadsheets, DriveService.Scope.Drive };
             string sheet = "ДДС";
             string secondsheet = "Источники (списки)";
